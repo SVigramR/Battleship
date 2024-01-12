@@ -10,11 +10,11 @@ maxHitFactory.hit()
 maxHitFactory.hit()
 maxHitFactory.hit()
 
-test("Ship Factory - Ship name and Length", () => {
+test("Ship Factory - Ship Name", () => {
     expect(carrierFactory.name).toEqual('Carrier')
 })
 
-test("Ship Factory - length", () => {
+test("Ship Factory - Ship Length", () => {
     expect(carrierFactory.length).toEqual(5)
 })
 
@@ -28,4 +28,12 @@ test("Ship Factory - Hit method incremental value", () => {
 
 test("Ship Factory - Hit method max hit crossed", () => {
     expect(maxHitFactory.hit()).toEqual(3)
+})
+
+test("Ship Factory - isSunk method, Ship not sunk", () => {
+    expect(carrierFactory.isSunk()).toEqual(false)
+})
+
+test("Ship Factory - isSunk method, Ship is sunk", () => {
+    expect(maxHitFactory.isSunk()).toEqual(true)
 })
