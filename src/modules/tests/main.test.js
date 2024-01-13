@@ -37,3 +37,25 @@ test("Ship Factory - isSunk method, Ship not sunk", () => {
 test("Ship Factory - isSunk method, Ship is sunk", () => {
     expect(maxHitFactory.isSunk()).toEqual(true)
 })
+
+// gameBoard tests
+let game = ship.gameBoard()
+
+test("gameBoard Factory - setBoard method, setting the board to 100x100", () => {
+    let cellfn = (row, column) => {
+        let gameArray = []
+        const coordinates = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+        for (let index = 0; index < row; index++) {
+            gameArray[index] = [];
+            for (let jIndex = 0; jIndex < column; jIndex++) {
+                  gameArray[index][jIndex] =  {
+                    coordinates:`${coordinates[jIndex]}${index + 1}`,
+                    name: "",
+                    hit: false,
+                    };
+            }
+        }
+        return gameArray
+    }
+    expect(game.setBoard(10,10)).toMatchObject(cellfn(10, 10))
+})
