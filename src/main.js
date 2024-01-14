@@ -45,6 +45,12 @@ function gameBoard() {
     }
 }
 
+function player() {
+    let playerOne = gameBoard()
+    let playerTwo = gameBoard()
+    return {playerOne, playerTwo}
+}
+
 let game = gameBoard()
 console.log(game.setBoard(10, 10))
 
