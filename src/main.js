@@ -25,7 +25,6 @@ function gameBoard() {
 
     return {
         ships: [carrier, battleship, cruiser, submarine, destroyer],
-        placeShips: () => {},
         setBoard: (row, column) => {
             for (let index = 0; index < row; index++) {
                 gameArray[index] = [];
@@ -34,11 +33,13 @@ function gameBoard() {
                         coordinates:`${coordinates[jIndex]}${index + 1}`,
                         name: "",
                         hit: false,
+                        hasShip: false,
                     };
                 }
             }
             return gameArray
         },
+        placeShips: () => {},
         receiveAttack: () => {},
         missedAttack: () => {},
         allShipSunk: () => {},

@@ -52,10 +52,15 @@ test("gameBoard Factory - setBoard method, setting the board to 100x100", () => 
                     coordinates:`${coordinates[jIndex]}${index + 1}`,
                     name: "",
                     hit: false,
+                    hasShip: false,
                     };
             }
         }
         return gameArray
     }
     expect(game.setBoard(10,10)).toMatchObject(cellfn(10, 10))
+})
+
+test("gameBoard Factory - placeShips method, testing the findCoordinates", () => {
+    expect(game.placeShips("carrier", false, "D5")).toContain(["B5", "C5", "D5", "E5", "F5"])
 })
