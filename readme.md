@@ -1,2 +1,3 @@
-#BattleShip
+# BattleShip
 In Progress....
+This project is part of TOP curriculum which enables us to develop apps with TDD concept
