@@ -10,30 +10,23 @@ function ship(name, length){
         isSunk: () => {
             return damage === length ? true : false;
         },
+        coords: [],
     }
 }
 
 function gameBoard() {
     let gameArray = []
-    const coordinates = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
-    let carrier = ship("Carrier", 5);
-    let battleship = ship("Battleship", 4);
-    let cruiser = ship("cruiser", 3);
-    let submarine = ship("submarine", 3);
-    let destroyer = ship("Destroyer", 2);
     let verticalAxis = false;
 
     return {
-        ships: [carrier, battleship, cruiser, submarine, destroyer],
+        ships: [ship("Carrier", 5), ship("Battleship", 4), ship("cruiser", 3), ship("submarine", 3), ship("Destroyer", 2)],
         setBoard: (row, column) => {
             for (let index = 0; index < row; index++) {
                 gameArray[index] = [];
                 for (let jIndex = 0; jIndex < column; jIndex++) {
                     gameArray[index][jIndex] =  {
-                        coordinates:`${coordinates[jIndex]}${index + 1}`,
-                        name: "",
-                        hit: false,
-                        hasShip: false,
+                        coordinates:`${jIndex},${index}`,
+                        isShip: false,
                     };
                 }
             }

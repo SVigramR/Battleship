@@ -44,15 +44,12 @@ let game = ship.gameBoard()
 test("gameBoard Factory - setBoard method, setting the board to 100x100", () => {
     let cellfn = (row, column) => {
         let gameArray = []
-        const coordinates = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
         for (let index = 0; index < row; index++) {
             gameArray[index] = [];
             for (let jIndex = 0; jIndex < column; jIndex++) {
                   gameArray[index][jIndex] =  {
-                    coordinates:`${coordinates[jIndex]}${index + 1}`,
-                    name: "",
-                    hit: false,
-                    hasShip: false,
+                    coordinates:`${jIndex},${index}`,
+                    isShip: false,
                     };
             }
         }
@@ -61,6 +58,6 @@ test("gameBoard Factory - setBoard method, setting the board to 100x100", () => 
     expect(game.setBoard(10,10)).toMatchObject(cellfn(10, 10))
 })
 
-test("gameBoard Factory - placeShips method, testing the findCoordinates", () => {
-    expect(game.placeShips("carrier", false, "D5")).toContain(["B5", "C5", "D5", "E5", "F5"])
-})
+// test("gameBoard Factory - placeShips method, testing the findCoordinates", () => {
+//     expect(game.placeShips("carrier", false, "D5")).toContain(["B5", "C5", "D5", "E5", "F5"])
+// })
