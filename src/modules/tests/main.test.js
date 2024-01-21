@@ -48,7 +48,7 @@ test("gameBoard Factory - setBoard method, setting the board to 100x100", () => 
             gameArray[index] = [];
             for (let jIndex = 0; jIndex < column; jIndex++) {
                   gameArray[index][jIndex] =  {
-                    coordinates:`${jIndex},${index}`,
+                    coordinates:[index,jIndex],
                     isShip: false,
                     };
             }
@@ -61,3 +61,30 @@ test("gameBoard Factory - setBoard method, setting the board to 100x100", () => 
 // test("gameBoard Factory - placeShips method, testing the findCoordinates", () => {
 //     expect(game.placeShips("carrier", false, "D5")).toContain(["B5", "C5", "D5", "E5", "F5"])
 // })
+
+test("gameBoard Factory - Out of Bound", () => {
+    let coordi = [7,8]
+    const verticalBound = (axis) => {
+        let value;
+        axis === false ? value = coordi[1] : value = coordi[0];
+        for(let i = 0; i < 5; i++) {
+            if (value > 9) {
+                if (axis === false) {
+                    throw new Error("Out of Bound - horizontal")
+                } else {
+                    throw new Error("Out of Bound - vertical")
+                }
+            }
+            value++
+        }
+        return true;
+    }
+    expect(() => verticalBound(true)).toThrow("Out of Bound - vertical")
+})
+
+test("gameBoard Factory - Already a ship present in the cell!", () => {
+    let board = ship.gameBoard()
+    board.setBoard(10, 10)
+    board.placeShips("Carrier", [1,1])
+    expect(() => board.placeShips("Destroyer", [1,1])).toThrow("Already there is a ship present in this cell")
+})
