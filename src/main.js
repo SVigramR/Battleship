@@ -100,8 +100,12 @@ function gameBoard() {
 
 function player() {
     let playerOne = gameBoard()
-    let playerTwo = gameBoard()
-    return {playerOne, playerTwo}
+    return {playerOne}
+}
+
+function computerPlays() {
+    let compAI = gameBoard()
+    return {compAI}
 }
 
 let game = gameBoard()
