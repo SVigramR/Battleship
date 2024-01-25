@@ -108,6 +108,8 @@ function computerPlays() {
     return {compAI}
 }
 
+function gameLoop() {}
+
 let game = gameBoard()
 game.setBoard(10, 10)
 console.log(game.placeShips("Carrier", [1,1]))
