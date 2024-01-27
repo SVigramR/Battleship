@@ -114,3 +114,14 @@ test("gameBoard Factory - allShipsSunk Method (False)!", () => {
     });
     expect(game.allShipSunk()).not.toBeTruthy()
 })
+
+let gametest = ship.gameBoard()
+gametest.setBoard(10,10)
+gametest.placeShips("Carrier", [1,1])
+test("gameBoard Factory - Receive Attack method - Ship was Hit!", () => {
+    expect(gametest.receiveAttack(1,1)).toBeTruthy()
+})
+
+test("gameBoard Factory - Receive Attack method - Attack Missed!", () => {
+    expect(gametest.receiveAttack(1,9)).not.toBeTruthy()
+})

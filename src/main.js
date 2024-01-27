@@ -16,7 +16,7 @@ function ship(name, length){
 
 function gameBoard() {
     let gameArray = []
-    let verticalAxis = true;
+    let verticalAxis = false;
     const ships = [ship("Carrier", 5), ship("Battleship", 4), ship("cruiser", 3), ship("submarine", 3), ship("Destroyer", 2)]
 
     return {
@@ -93,8 +93,38 @@ function gameBoard() {
             }
             return gameArray
         },
-        receiveAttack: () => {},
-        missedAttack: () => {},
+        receiveAttack: (row, column) => {
+            const loopGameArray = (xAxis, yAxis) => {
+                let bool;
+                gameArray.forEach(rowArr => {
+                    rowArr.forEach(object => {
+                        if (object.coordinates[0] === xAxis && object.coordinates[1] === yAxis) {
+                            bool = object.isShip
+                        }
+                    })
+                })
+                return bool;
+            }
+            let findObject = loopGameArray(row, column)
+            console.log("🚀 ~ gameBoard ~ findObject:", findObject)
+            if (findObject) {
+                ships.forEach(shipy => {
+                    let shipcoord = shipy.coords
+                    shipcoord.forEach(coord => {
+                        // coord.forEach(place => {
+                            if (coord[0] === row && coord[1] === column) {
+                                shipy.hit()
+                                console.log("It's a Hit")
+                            }
+                        // })
+                    })
+                })
+                return true
+            } else {
+                console.log("Waste of Ammunition")
+                return false
+            }
+        },
         allShipSunk: () => {
             let shipsSunk = 0
             ships.forEach(ship => {
