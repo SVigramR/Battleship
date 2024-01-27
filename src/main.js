@@ -20,6 +20,7 @@ function gameBoard() {
     const ships = [ship("Carrier", 5), ship("Battleship", 4), ship("cruiser", 3), ship("submarine", 3), ship("Destroyer", 2)]
 
     return {
+        allShips: ships,
         setBoard: (row, column) => {
             for (let index = 0; index < row; index++) {
                 gameArray[index] = [];
@@ -94,7 +95,17 @@ function gameBoard() {
         },
         receiveAttack: () => {},
         missedAttack: () => {},
-        allShipSunk: () => {},
+        allShipSunk: () => {
+            let shipsSunk = 0
+            ships.forEach(ship => {
+                if (ship.isSunk()) shipsSunk++;
+            });
+            if (shipsSunk === 5) {
+                return true
+            } else {
+                return false
+            }
+        },
     }
 }
 

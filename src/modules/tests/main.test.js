@@ -88,3 +88,18 @@ test("gameBoard Factory - Already a ship present in the cell!", () => {
     board.placeShips("Carrier", [1,1])
     expect(() => board.placeShips("Destroyer", [1,1])).toThrow("Already there is a ship present in this cell")
 })
+
+// test("gameBoard Factory - Receive Attack method!", () => {
+//     expect().toBe()
+// })
+
+test("gameBoard Factory - allShipsSunk Method!", () => {
+    let game = ship.gameBoard()
+    let ships = game.allShips
+    ships.forEach(element => {
+        for (let index = 0; index < element.length; index++) {
+            element.hit()
+        }
+    });
+    expect(game.allShipSunk()).toBeTruthy()
+})
