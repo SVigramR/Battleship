@@ -93,7 +93,7 @@ test("gameBoard Factory - Already a ship present in the cell!", () => {
 //     expect().toBe()
 // })
 
-test("gameBoard Factory - allShipsSunk Method!", () => {
+test("gameBoard Factory - allShipsSunk Method (True)!", () => {
     let game = ship.gameBoard()
     let ships = game.allShips
     ships.forEach(element => {
@@ -102,4 +102,15 @@ test("gameBoard Factory - allShipsSunk Method!", () => {
         }
     });
     expect(game.allShipSunk()).toBeTruthy()
+})
+
+test("gameBoard Factory - allShipsSunk Method (False)!", () => {
+    let game = ship.gameBoard()
+    let ships = game.allShips
+    ships.forEach(element => {
+        for (let index = 0; index < 3; index++) {
+            element.hit()
+        }
+    });
+    expect(game.allShipSunk()).not.toBeTruthy()
 })
