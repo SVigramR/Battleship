@@ -17,7 +17,7 @@ function ship(name, length){
 function gameBoard() {
     let gameArray = []
     let verticalAxis = false;
-    const ships = [ship("Carrier", 5), ship("Battleship", 4), ship("cruiser", 3), ship("submarine", 3), ship("Destroyer", 2)]
+    const ships = [ship("Carrier", 5), ship("Battleship", 4), ship("Cruiser", 3), ship("Submarine", 3), ship("Destroyer", 2)]
 
     return {
         allShips: ships,
