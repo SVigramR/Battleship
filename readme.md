@@ -1,9 +1,38 @@
 # BattleShip
-In Progress....
-This project is part of TOP curriculum which enables us to develop apps with TDD concept.
+This project is part of The Odin Project curriculum, focusing on developing apps with Test-Driven Development (TDD) concepts. The game is a console-based application without a graphical user interface, featuring a ship game.
 
-The project consists of game factory function which functions without UI.
-These are: ship(), gameBoard(), player(), computerPlays().
+## Components
+1. Ship Factory Function (ship.js)
+The Ship factory function creates ship objects for the game. It takes two parameters: name and length of the ship. The resulting object includes key/value pairs and functions:
 
-Code Structure:
-- Ship() is a factory function which outputs an object contains the ship for the game. The function takes two parameters - name and length of the ship. The object has a parameters as key/value pairs along with two functions, one to damage the ship and another to validate whether the ship is sunk. Finally an coordinates key which as array of coordinates to know the where the ship is placed in the game board.
+#### hit()
+A function to damage the ship. It increments the hits property.
+
+#### isSunk()
+A function to check whether the ship is sunk. It returns true if the ship is sunk, otherwise false.
+
+2. Game Board Factory Function (gameBoard.js)
+...
+
+3. Player Factory Function (player.js)
+...
+
+4. Computer Plays Function (computerPlays.js)
+...
+
+## Getting Started
+Clone the repository: git clone <repository-url>
+Install dependencies: npm install
+Run tests: npm test
+
+## Usage
+...
+
+## Testing
+...
+
+## Contributing
+...
+
+## License
+This project is licensed under the MIT License - see the LICENSE.md file for details.
