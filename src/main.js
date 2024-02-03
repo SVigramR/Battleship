@@ -140,12 +140,24 @@ function gameBoard() {
 }
 
 function player() {
-    let playerOne = gameBoard()
-    return {playerOne}
+    let playerGame = gameBoard()
+    playerGame.setBoard(10,10)
+    return {playerGame}
 }
 
-function computerPlays() {
+function computer() {
+    const shipNames = ["Carrier", "BattleShip", "Cruiser", "Submarine", "Destroyer"]
     let compAI = gameBoard()
+    compAI.setBoard(10,10)
+    const generateCoords = () => {
+        const random = () => {
+            return Math.floor(Math.random() * 10)
+        }
+        return [random(), random()]
+    }
+    for (let index = 0; index < 5; index++) {
+        compAI.placeShips(shipNames[index], generateCoords())
+    }
     return {compAI}
 }
 
