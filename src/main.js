@@ -44,9 +44,9 @@ function gameBoard() {
                 for(let i = 0; i < boatObject.length; i++) {
                     if (value > 9) {
                         if (verticalAxis === false) {
-                            throw new Error("Out of Bound - horizontal")
+                            return "Out of Bound - horizontal"
                         } else {
-                            throw new Error("Out of Bound - vertical")
+                            return "Out of Bound - vertical"
                         }
                     }
                     value++
@@ -80,7 +80,7 @@ function gameBoard() {
                         row.forEach(cell => {
                             if (cell.coordinates[0] === findCoords[0] && cell.coordinates[1] === findCoords[1]) {
                                 if (cell.isShip === true) {
-                                    throw new Error("Already there is a ship present in this cell")
+                                    return "Already there is a ship present in this cell"
                                 } else {
                                     cell.isShip = true;
                                 }
@@ -111,12 +111,10 @@ function gameBoard() {
                 ships.forEach(shipy => {
                     let shipcoord = shipy.coords
                     shipcoord.forEach(coord => {
-                        // coord.forEach(place => {
-                            if (coord[0] === row && coord[1] === column) {
-                                shipy.hit()
-                                console.log("It's a Hit")
-                            }
-                        // })
+                        if (coord[0] === row && coord[1] === column) {
+                            shipy.hit()
+                            console.log("It's a Hit")
+                        }
                     })
                 })
                 return true
@@ -155,6 +153,7 @@ function computer() {
         }
         return [random(), random()]
     }
+    console.log(generateCoords())
     for (let index = 0; index < 5; index++) {
         compAI.placeShips(shipNames[index], generateCoords())
     }
@@ -170,4 +169,5 @@ console.log(game.placeShips("Carrier", [1,1]))
 module.exports = {
     ship: ship,
     gameBoard: gameBoard,
+    computer: computer,
 }
