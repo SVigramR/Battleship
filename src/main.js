@@ -1,3 +1,5 @@
+import "./style.css";
+
 function ship(name, length){
     let damage = 0
     return {
