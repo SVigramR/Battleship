@@ -86,7 +86,7 @@ test("gameBoard Factory - Already a ship present in the cell!", () => {
     let board = ship.gameBoard()
     board.setBoard(10, 10)
     board.placeShips("Carrier", [1,1])
-    expect(() => board.placeShips("Destroyer", [1,1])).toThrow("Already there is a ship present in this cell")
+    expect(board.placeShips("Destroyer", [1,1])).toBe("Already there is a ship present in this cell")
 })
 
 // test("gameBoard Factory - Receive Attack method!", () => {
@@ -117,7 +117,8 @@ test("gameBoard Factory - allShipsSunk Method (False)!", () => {
 
 let gametest = ship.gameBoard()
 gametest.setBoard(10,10)
-gametest.placeShips("Carrier", [1,1])
+console.log(gametest.placeShips("Carrier", [1,1]))
+
 test("gameBoard Factory - Receive Attack method - Ship was Hit!", () => {
     expect(gametest.receiveAttack(1,1)).toBeTruthy()
 })

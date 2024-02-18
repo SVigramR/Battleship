@@ -1,4 +1,4 @@
-import "./style.css";
+// import "./style.css";
 
 function ship(name, length){
     let damage = 0
@@ -19,9 +19,13 @@ function ship(name, length){
 function gameBoard() {
     let gameArray = []
     let verticalAxis = false;
-    const ships = [ship("Carrier", 5), ship("Battleship", 4), ship("Cruiser", 3), ship("Submarine", 3), ship("Destroyer", 2)]
+    let ships = [ship("Carrier", 5), ship("Battleship", 4), ship("Cruiser", 3), ship("Submarine", 3), ship("Destroyer", 2)]
 
+    function compareArrays(arrayOne, arrayTwo) {
+        return JSON.stringify(arrayOne) === JSON.stringify(arrayTwo);
+    }
     return {
+        board: gameArray,
         allShips: ships,
         setBoard: (row, column) => {
             for (let index = 0; index < row; index++) {
@@ -36,9 +40,9 @@ function gameBoard() {
             return gameArray
         },
         placeShips: (boat, coordi) => {
-            const boatObject = ships.find(object => { 
-                return object.name === boat
-            })
+            const boatObject = () => {
+                return ships.find(object => object.name === boat)
+            }
             console.log("🚀 ~ boatObject ~ boatObject:", boatObject)
             const outOfBound = () => {
                 let value;
@@ -96,34 +100,6 @@ function gameBoard() {
             return gameArray
         },
         receiveAttack: (row, column) => {
-            const loopGameArray = (xAxis, yAxis) => {
-                let bool;
-                gameArray.forEach(rowArr => {
-                    rowArr.forEach(object => {
-                        if (object.coordinates[0] === xAxis && object.coordinates[1] === yAxis) {
-                            bool = object.isShip
-                        }
-                    })
-                })
-                return bool;
-            }
-            let findObject = loopGameArray(row, column)
-            console.log("🚀 ~ gameBoard ~ findObject:", findObject)
-            if (findObject) {
-                ships.forEach(shipy => {
-                    let shipcoord = shipy.coords
-                    shipcoord.forEach(coord => {
-                        if (coord[0] === row && coord[1] === column) {
-                            shipy.hit()
-                            console.log("It's a Hit")
-                        }
-                    })
-                })
-                return true
-            } else {
-                console.log("Waste of Ammunition")
-                return false
-            }
         },
         allShipSunk: () => {
             let shipsSunk = 0
@@ -145,9 +121,9 @@ function player() {
     return {playerGame}
 }
 
+const compAI = gameBoard()
 function computer() {
     const shipNames = ["Carrier", "BattleShip", "Cruiser", "Submarine", "Destroyer"]
-    let compAI = gameBoard()
     compAI.setBoard(10,10)
     const generateCoords = () => {
         const random = () => {
