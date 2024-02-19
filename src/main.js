@@ -1,4 +1,4 @@
-// import "./style.css";
+import './style.css'
 
 function ship(name, length){
     let damage = 0
@@ -31,10 +31,7 @@ function gameBoard() {
             for (let index = 0; index < row; index++) {
                 gameArray[index] = [];
                 for (let jIndex = 0; jIndex < column; jIndex++) {
-                    gameArray[index][jIndex] =  {
-                        coordinates: [index,jIndex],
-                        isShip: false,
-                    };
+                    gameArray[index][jIndex] =  null
                 }
             }
             return gameArray
@@ -44,16 +41,13 @@ function gameBoard() {
                 return ships.find(object => object.name === boat)
             }
             console.log("🚀 ~ boatObject ~ boatObject:", boatObject)
+            let singleBoat = boatObject()
             const outOfBound = () => {
                 let value;
                 verticalAxis === false ? value = coordi[1] : value = coordi[0];
-                for(let i = 0; i < boatObject.length; i++) {
+                for(let i = 0; i < singleBoat.length; i++) {
                     if (value > 9) {
-                        if (verticalAxis === false) {
-                            return "Out of Bound - horizontal"
-                        } else {
-                            return "Out of Bound - vertical"
-                        }
+                        return false
                     }
                     value++
                 }
@@ -65,13 +59,13 @@ function gameBoard() {
                 let arr = [];
                 if (verticalAxis === false) {
                     let value = num[1]
-                    for(let i = 0; i < boatObject.length; i++) {
+                    for(let i = 0; i < singleBoat.length; i++) {
                         arr.push([num[0],value])
                         value++
                     }
                 } else {
                     let value = num[0]
-                    for(let i = 0; i < boatObject.length; i++) {
+                    for(let i = 0; i < singleBoat.length; i++) {
                         arr.push([value,num[1]])
                         value++
                     }
@@ -82,22 +76,17 @@ function gameBoard() {
                 let shipCoords = placementArray(coordi);
                 for (let z = 0; z < shipCoords.length; z++) {
                     let findCoords = shipCoords[z];
-                    gameArray.forEach(row => {
-                        row.forEach(cell => {
-                            if (cell.coordinates[0] === findCoords[0] && cell.coordinates[1] === findCoords[1]) {
-                                if (cell.isShip === true) {
-                                    return "Already there is a ship present in this cell"
-                                } else {
-                                    cell.isShip = true;
-                                }
-                            }
-                        });
-                    });
+                    if (gameArray[findCoords[0]][findCoords[1]] !== null) {
+                        return "Already there is a ship present in this cell"
+                    } else {
+                        gameArray[findCoords[0]][findCoords[1]] = boat         
+                    }
                 }
                 boatObject.coords = shipCoords
                 console.log("🚀 ~ gameBoard ~ boatObject.coords:", boatObject.coords)
+            } else {
+                return "Out of Bound"
             }
-            return gameArray
         },
         receiveAttack: (row, column) => {
         },
@@ -142,10 +131,12 @@ function gameLoop() {}
 
 let game = gameBoard()
 game.setBoard(10, 10)
-console.log(game.placeShips("Carrier", [1,1]))
+game.placeShips("Carrier", [1,1])
+game.placeShips("Battleship", [1,8])
+console.log(game.board)
 
-module.exports = {
-    ship: ship,
-    gameBoard: gameBoard,
-    computer: computer,
+export {
+    ship,
+    gameBoard,
+    computer
 }
