@@ -41,6 +41,7 @@ function gameBoard() {
                 return ships.find(object => object.name === boat)
             }
             console.log("🚀 ~ boatObject ~ boatObject:", boatObject)
+            
             let singleBoat = boatObject()
             const outOfBound = () => {
                 let value;
@@ -53,8 +54,9 @@ function gameBoard() {
                 }
                 return true
             }
-            let bound = outOfBound()
-            console.log("🚀 ~ gameBoard ~ bound:", bound)
+            let boundOrNot = outOfBound()
+            console.log("🚀 ~ gameBoard ~ bound:", boundOrNot)
+
             const placementArray = (num) => {
                 let arr = [];
                 if (verticalAxis === false) {
@@ -72,7 +74,26 @@ function gameBoard() {
                 }
                 return arr
             }
-            if (bound) {
+
+            const shipInCell = () => {
+                let bound = outOfBound()
+                if (bound) {
+                    let shipCoords = placementArray(coordi);
+                    for (let z = 0; z < shipCoords.length; z++) {
+                        let findCoords = shipCoords[z];
+                        if (gameArray[findCoords[0]][findCoords[1]] !== null) {
+                            return false
+                        }
+                    }
+                    return true
+                } else {
+                    return "Out of Bound"
+                }
+            }
+
+            const notNull = shipInCell()
+
+            if (notNull) {
                 let shipCoords = placementArray(coordi);
                 for (let z = 0; z < shipCoords.length; z++) {
                     let findCoords = shipCoords[z];
@@ -85,7 +106,7 @@ function gameBoard() {
                 boatObject.coords = shipCoords
                 console.log("🚀 ~ gameBoard ~ boatObject.coords:", boatObject.coords)
             } else {
-                return "Out of Bound"
+                return "Already there is a ship present in this cell"
             }
         },
         receiveAttack: (row, column) => {
@@ -132,7 +153,7 @@ function gameLoop() {}
 let game = gameBoard()
 game.setBoard(10, 10)
 game.placeShips("Carrier", [1,1])
-game.placeShips("Battleship", [1,8])
+game.placeShips("Battleship", [1,0])
 console.log(game.board)
 
 export {
