@@ -106,7 +106,12 @@ function gameBoard() {
             }
         },
         receiveAttack: (row, column) => {
-            
+            let attack = gameArray[row][column]
+            if (attack !== null) {
+                let findBoat = boatObject(attack)
+                findBoat.hit()
+                console.log(findBoat.isSunk())
+            }
         },
         allShipSunk: () => {
             let shipsSunk = 0
@@ -152,6 +157,7 @@ game.setBoard(10, 10)
 game.placeShips("Carrier", [1,1])
 game.placeShips("Battleship", [1,0])
 console.log(game.board)
+game.receiveAttack(1,1)
 
 export {
     ship,
