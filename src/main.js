@@ -21,9 +21,10 @@ function gameBoard() {
     let verticalAxis = false;
     let ships = [ship("Carrier", 5), ship("Battleship", 4), ship("Cruiser", 3), ship("Submarine", 3), ship("Destroyer", 2)]
 
-    function compareArrays(arrayOne, arrayTwo) {
-        return JSON.stringify(arrayOne) === JSON.stringify(arrayTwo);
+    const boatObject = (boat) => {
+        return ships.find(object => object.name === boat)
     }
+
     return {
         board: gameArray,
         allShips: ships,
@@ -37,12 +38,7 @@ function gameBoard() {
             return gameArray
         },
         placeShips: (boat, coordi) => {
-            const boatObject = () => {
-                return ships.find(object => object.name === boat)
-            }
-            console.log("🚀 ~ boatObject ~ boatObject:", boatObject)
-            
-            let singleBoat = boatObject()
+            let singleBoat = boatObject(boat)
             const outOfBound = () => {
                 let value;
                 verticalAxis === false ? value = coordi[1] : value = coordi[0];
@@ -110,6 +106,7 @@ function gameBoard() {
             }
         },
         receiveAttack: (row, column) => {
+            
         },
         allShipSunk: () => {
             let shipsSunk = 0
