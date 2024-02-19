@@ -110,6 +110,7 @@ function gameBoard() {
             if (attack !== null) {
                 let findBoat = boatObject(attack)
                 findBoat.hit()
+                gameArray[row][column] = null
                 console.log(findBoat.isSunk())
             }
         },
