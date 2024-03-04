@@ -21,7 +21,7 @@ function gameBoard() {
     let verticalAxis = false;
     let ships = [ship("Carrier", 5), ship("Battleship", 4), ship("Cruiser", 3), ship("Submarine", 3), ship("Destroyer", 2)]
 
-    const boatObject = (boat) => {
+    let boatObject = (boat) => {
         return ships.find(object => object.name === boat)
     }
 
@@ -39,6 +39,10 @@ function gameBoard() {
         },
         placeShips: (boat, coordi) => {
             let singleBoat = boatObject(boat)
+            if (!singleBoat) {
+                console.error('Invalid boat name:', boat);
+                return "Invalid boat";
+            }
             const outOfBound = () => {
                 let value;
                 verticalAxis === false ? value = coordi[1] : value = coordi[0];
@@ -134,9 +138,9 @@ function player() {
     return {playerGame}
 }
 
-const compAI = gameBoard()
 function computer() {
-    const shipNames = ["Carrier", "BattleShip", "Cruiser", "Submarine", "Destroyer"]
+    const compAI = gameBoard()
+    const shipNames = ["Carrier", "Battleship", "Cruiser", "Submarine", "Destroyer"]
     compAI.setBoard(10,10)
     const generateCoords = () => {
         const random = () => {
@@ -148,7 +152,7 @@ function computer() {
     for (let index = 0; index < 5; index++) {
         compAI.placeShips(shipNames[index], generateCoords())
     }
-    return {compAI}
+    return compAI
 }
 
 function gameLoop() {}
@@ -159,6 +163,9 @@ game.placeShips("Carrier", [1,1])
 game.placeShips("Battleship", [1,0])
 console.log(game.board)
 game.receiveAttack(1,1)
+
+let comp = computer()
+console.table(comp.board)
 
 export {
     ship,
