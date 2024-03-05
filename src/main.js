@@ -28,6 +28,7 @@ function gameBoard() {
     return {
         board: gameArray,
         allShips: ships,
+        setAxis: (axis) => verticalAxis = axis,
         setBoard: (row, column) => {
             for (let index = 0; index < row; index++) {
                 gameArray[index] = [];
@@ -149,8 +150,12 @@ function computer() {
         }
         return [random(), random()]
     }
-    console.log(generateCoords())
+    const randomBool = () => {
+        let random = Math.round(Math.random());
+        return random === 1 ? true : false;
+    }
     for (let index = 0; index < shipNames.length; index++) {
+        compAI.setAxis(randomBool())
         let placer = compAI.placeShips(shipNames[index], generateCoords())
         if (typeof placer === "string") {
             index--
