@@ -76,37 +76,38 @@ function gameBoard() {
             }
 
             const shipInCell = () => {
-                let bound = outOfBound()
+                let bound = outOfBound();
                 if (bound) {
                     let shipCoords = placementArray(coordi);
                     for (let z = 0; z < shipCoords.length; z++) {
                         let findCoords = shipCoords[z];
+                        // Check if coordinates are within game bounds
+                        if (findCoords[0] < 0 || findCoords[0] > 9 || findCoords[1] < 0 || findCoords[1] > 9) {
+                            return false;
+                        }
+                        // Check if the cell is occupied by another ship
                         if (gameArray[findCoords[0]][findCoords[1]] !== null) {
-                            return false
+                            return false;
                         }
                     }
-                    return true
+                    return true;
                 } else {
-                    return "Out of Bound"
+                    return false; // Out of Bound
                 }
             }
-
-            const notNull = shipInCell()
-
+        
+            const notNull = shipInCell();
+        
             if (notNull) {
                 let shipCoords = placementArray(coordi);
                 for (let z = 0; z < shipCoords.length; z++) {
                     let findCoords = shipCoords[z];
-                    if (gameArray[findCoords[0]][findCoords[1]] !== null) {
-                        return "Already there is a ship present in this cell"
-                    } else {
-                        gameArray[findCoords[0]][findCoords[1]] = boat         
-                    }
+                    gameArray[findCoords[0]][findCoords[1]] = boat;
                 }
-                boatObject.coords = shipCoords
-                console.log("🚀 ~ gameBoard ~ boatObject.coords:", boatObject.coords)
+                boatObject.coords = shipCoords;
+                console.log("🚀 ~ gameBoard ~ boatObject.coords:", boatObject.coords);
             } else {
-                return "Already there is a ship present in this cell"
+                return "Invalid placement: Either out of bound or already occupied";
             }
         },
         receiveAttack: (row, column) => {
@@ -149,9 +150,13 @@ function computer() {
         return [random(), random()]
     }
     console.log(generateCoords())
-    for (let index = 0; index < 5; index++) {
-        compAI.placeShips(shipNames[index], generateCoords())
+    for (let index = 0; index < shipNames.length; index++) {
+        let placer = compAI.placeShips(shipNames[index], generateCoords())
+        if (typeof placer === "string") {
+            index--
+        }
     }
+
     return compAI
 }
 
