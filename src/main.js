@@ -1,3 +1,4 @@
+import { gameBoardModal } from './modules/modal';
 import './style.css'
 
 function ship(name, length){
@@ -176,6 +177,8 @@ game.receiveAttack(1,1)
 
 let comp = computer()
 console.table(comp.board)
+
+gameBoardModal()
 
 export {
     ship,
