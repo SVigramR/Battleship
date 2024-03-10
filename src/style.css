@@ -56,3 +56,29 @@ main {
     font-weight: 900;
     font-size: 2rem;
 }
+
+#boardHolder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5rem;
+    padding: 2rem;
+    margin: 2rem;
+}
+
+#playerBoard, #computerBoard {
+    height: 500px;
+    width: 500px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    background-color: #ffffff;
+}
+
+#playerBoard div, #computerBoard div  {
+    border: #000000 solid 2px;
+}
+
+/* #computerBoard div {
+    border: #0f9c02 solid 2px;
+} */
