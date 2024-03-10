@@ -66,7 +66,7 @@ main {
     margin: 2rem;
 }
 
-#playerBoard, #computerBoard {
+#playerBoard, #computerBoard, #placeBoard {
     height: 500px;
     width: 500px;
     display: grid;
@@ -75,10 +75,78 @@ main {
     background-color: #ffffff;
 }
 
-#playerBoard div, #computerBoard div  {
+#playerBoard div, #computerBoard div {
     border: #000000 solid 2px;
 }
 
-/* #computerBoard div {
-    border: #0f9c02 solid 2px;
-} */
+/* popup */
+.popup .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(62, 90, 62, 0.8);
+    transition: 200ms ease-in-out;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.popup.active .overlay {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.popup .form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    height: 600px;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+    z-index: 10;
+    border-radius: 3px;
+    background-color: whitesmoke;
+    padding: 1rem;
+}
+
+.popup.active .form {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.addTaskHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.addTaskClose {
+    color: #000000;
+    /* line-height: 1rem; */
+    font-size: 2rem;
+    cursor: pointer;
+    font-family: lato, sans-serif;
+}
+
+.placeBoardHolder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+#placeBoard {
+    border-top: #000000 solid 3px;
+    border-left: #000000 solid 3px;
+
+}
+
+#placeBoard div {
+    border-bottom: #000000 solid 3px;
+    border-right: #000000 solid 3px;
+}
+
+.placing-output {
+    text-align: center;
+}

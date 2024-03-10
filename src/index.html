@@ -14,6 +14,19 @@
     </header>
 
     <main>
+        <div class="popup" id="addTaskPopup">
+            <div data-background class="overlay" id="addTaskOverlay"></div>
+            <div class="form flex-column" id="addTaskForm">
+                <div class="addTaskHeader">
+                    <h1 class="addFormTitle">Place Ships...</h1>
+                    <div data-close class="addTaskClose">x</div>
+                </div>
+                <div class="placeBoardHolder">
+                    <div id="placeBoard"></div>
+                </div>
+                <div class="placing-output">Begin to Place Ships</div>
+            </div>
+        </div>
         <div id="playerTurnDiv">Player Turn</div>
         <div id="resultDiv">Start your Move...</div>
         <div id="boardHolder">
@@ -21,6 +34,7 @@
             <div id="computerBoard"></div>
         </div>
         <div id="controller"></div>
+        <button id="startBtn">START</button>
     </main>
 
     <footer>

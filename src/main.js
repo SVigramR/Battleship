@@ -1,4 +1,5 @@
 import { gameBoardModal } from './modules/modal';
+import popupListener from './modules/popup';
 import './style.css'
 
 function ship(name, length){
@@ -136,9 +137,9 @@ function gameBoard() {
 }
 
 function player() {
-    let playerGame = gameBoard()
+    const playerGame = gameBoard()
     playerGame.setBoard(10,10)
-    return {playerGame}
+    return playerGame
 }
 
 function computer() {
@@ -179,6 +180,8 @@ let comp = computer()
 console.table(comp.board)
 
 gameBoardModal()
+
+popupListener()
 
 export {
     ship,
