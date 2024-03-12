@@ -136,7 +136,7 @@ function gameBoard() {
     }
 }
 
-function player() {
+function playerGame() {
     const playerGame = gameBoard()
     playerGame.setBoard(10,10)
     return playerGame
@@ -168,6 +168,32 @@ function computer() {
 }
 
 function gameLoop() {}
+
+const player = playerGame()
+
+function placingShipLoop() {
+    for (let index = 0; index < 5; index++) {
+
+    }
+}
+
+function playerInput() {
+    let getInput = document.getElementById('shipPlacingInput').value
+    let inputBtn = document.getElementById('shipPlacingBtn')
+    let status = document.getElementById('placingStatus')
+    const shipNames = ["Carrier", "Battleship", "Cruiser", "Submarine", "Destroyer"]
+
+    for (let index = 0; index < 5; index++) {
+        inputBtn.addEventListener('click', () => {
+            let place = player.placeShips(shipNames[index], [Number(getInput[0]), Number(getInput[2])])
+            if (typeof place === "string") {
+                status = place
+            } else {
+                status = `Place Ship:${shipNames[index]}`
+            }
+        })
+    }
+}
 
 let game = gameBoard()
 game.setBoard(10, 10)
