@@ -145,6 +145,10 @@ main {
 #placeBoard div {
     border-bottom: #000000 solid 3px;
     border-right: #000000 solid 3px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .placing-output {

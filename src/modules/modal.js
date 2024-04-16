@@ -17,7 +17,10 @@ const placeBoard = document.getElementById('placeBoard')
 function placeShipModal() {
     for (let index = 0; index < 100; index++) {
         let div = document.createElement('div')
+        let para = document.createElement('p')
         div.setAttribute('id', classArray[index])
+        para.textContent = classArray[index]
+        div.appendChild(para)
         placeBoard.appendChild(div)
     }
 }

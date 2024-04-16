@@ -169,30 +169,38 @@ function computer() {
 
 function gameLoop() {}
 
-const player = playerGame()
+let player = playerGame()
 
 function placingShipLoop() {
-    for (let index = 0; index < 5; index++) {
 
-    }
+    popupListener()
+    playerInput()
 }
 
 function playerInput() {
-    let getInput = document.getElementById('shipPlacingInput').value
     let inputBtn = document.getElementById('shipPlacingBtn')
-    let status = document.getElementById('placingStatus')
-    const shipNames = ["Carrier", "Battleship", "Cruiser", "Submarine", "Destroyer"]
-
-    for (let index = 0; index < 5; index++) {
-        inputBtn.addEventListener('click', () => {
-            let place = player.placeShips(shipNames[index], [Number(getInput[0]), Number(getInput[2])])
-            if (typeof place === "string") {
-                status = place
+    let currentShipIndex = 0;
+    inputBtn.addEventListener('click', () => {
+        let getInput = document.getElementById('shipPlacingInput').value
+        let row = Number(getInput[0]);
+        let column = Number(getInput[1]);
+        const shipNames = ["Carrier", "Battleship", "Cruiser", "Submarine", "Destroyer"]
+        let placementResult = player.placeShips(shipNames[currentShipIndex], [row, column])
+        console.table(player.board)
+        if (placementResult !== "Invalid placement: Either out of bound or already occupied") {
+            // Move to the next ship if the placement is successful
+            currentShipIndex++;
+            // Check if all ships have been placed
+            if (currentShipIndex === shipNames.length) {
+                console.log("All ships have been placed.");
+                // Start the game loop or do whatever comes next in your game
             } else {
-                status = `Place Ship:${shipNames[index]}`
+                console.log("Placing next ship:", shipNames[currentShipIndex]);
             }
-        })
-    }
+        } else {
+            console.log("Failed to place the ship. Try again.");
+        }
+    })
 }
 
 let game = gameBoard()
@@ -206,8 +214,12 @@ let comp = computer()
 console.table(comp.board)
 
 gameBoardModal()
+console.log(Number('0'))
+console.table(player.board)
+// popupListener()
+// playerInput()
+placingShipLoop()
 
-popupListener()
 
 export {
     ship,
