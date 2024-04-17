@@ -1,4 +1,4 @@
-import { gameBoardModal } from './modules/modal';
+import { gameBoardModal, startModal } from './modules/modal';
 import popupListener from './modules/popup';
 import './style.css'
 
@@ -107,7 +107,7 @@ function gameBoard() {
                     let findCoords = shipCoords[z];
                     gameArray[findCoords[0]][findCoords[1]] = boat;
                 }
-                boatObject.coords = shipCoords;
+                singleBoat.coords = shipCoords;
                 console.log("🚀 ~ gameBoard ~ boatObject.coords:", boatObject.coords);
             } else {
                 return "Invalid placement: Either out of bound or already occupied";
@@ -172,13 +172,27 @@ function gameLoop() {}
 let player = playerGame()
 
 function placingShipLoop() {
-
     popupListener()
     playerInput()
+    toggleAxis()
+}
+
+let addColorToShips = player.allShips
+function colorBoat(boat) {
+    return addColorToShips.find(object => object.name === boat)
+}
+
+function joinCoords(arrays) {
+    const combinedArray = arrays.map(innerArr => innerArr.join(""));
+    return combinedArray
 }
 
 function playerInput() {
     let inputBtn = document.getElementById('shipPlacingBtn')
+    let shipStatus = document.getElementById('placingStatus')
+    let statusOutput = document.querySelector('.placing-output')
+    const popupBackground = document.querySelectorAll('[data-background]')
+
     let currentShipIndex = 0;
     inputBtn.addEventListener('click', () => {
         let getInput = document.getElementById('shipPlacingInput').value
@@ -188,17 +202,40 @@ function playerInput() {
         let placementResult = player.placeShips(shipNames[currentShipIndex], [row, column])
         console.table(player.board)
         if (placementResult !== "Invalid placement: Either out of bound or already occupied") {
+            let boat = colorBoat(shipNames[currentShipIndex])
+            let ship = boat.coords
+            let combinedCoords = joinCoords(ship)
+            for (let index = 0; index < combinedCoords.length; index++) {
+                let id = document.getElementById(`place${combinedCoords[index]}`)
+                let playerid =document.getElementById(`player${combinedCoords[index]}`)
+                id.classList.add('activeship')
+                playerid.classList.add('activeship')
+            }
             // Move to the next ship if the placement is successful
             currentShipIndex++;
             // Check if all ships have been placed
             if (currentShipIndex === shipNames.length) {
                 console.log("All ships have been placed.");
+                startModal();
                 // Start the game loop or do whatever comes next in your game
             } else {
+                shipStatus.textContent = `Placing next ship: ${shipNames[currentShipIndex]}`
                 console.log("Placing next ship:", shipNames[currentShipIndex]);
             }
         } else {
+            statusOutput.textContent = "Failed to place the ship. Try again."
             console.log("Failed to place the ship. Try again.");
+        }
+    })            // Move to the next ship if the placement is successful
+}
+
+function toggleAxis() {
+    let toggle = document.getElementById('toggle')
+    toggle.addEventListener('change', function() {
+        if (this.checked) {
+            player.setAxis(true)
+        } else {
+            player.setAxis(false)
         }
     })
 }
@@ -215,9 +252,7 @@ console.table(comp.board)
 
 gameBoardModal()
 console.log(Number('0'))
-console.table(player.board)
-// popupListener()
-// playerInput()
+console.table(player.board) 
 placingShipLoop()
 
 

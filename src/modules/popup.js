@@ -1,14 +1,25 @@
-import { placeShipModal } from "./modal"
+import { gameBoardModal, placeShipModal } from "./modal"
 
 function popupListener() {
     const openTaskForm = document.querySelector('#startBtn')
     const popupBackground = document.querySelectorAll('[data-background]')
     const popupClose = document.querySelectorAll('[data-close]')
     const placeBoard = document.querySelector('#placeBoard')
+    const playerBoard = document.getElementById('playerBoard')
+    const computerBoard = document.getElementById('computerBoard')
 
     const removeDivs = () => {
         while (placeBoard.firstChild) {
             placeBoard.removeChild(placeBoard.firstChild)
+        }
+    }
+
+    const BoardRemoveDiv = () => {
+        while (playerBoard.firstChild) {
+            playerBoard.removeChild(playerBoard.firstChild)
+        }
+        while (computerBoard.firstChild) {
+            computerBoard.removeChild(computerBoard.firstChild)
         }
     }
 
@@ -21,6 +32,8 @@ function popupListener() {
         background.addEventListener('click', () => {
             document.getElementById('addTaskPopup').classList.remove('active')
             removeDivs()
+            BoardRemoveDiv()
+            gameBoardModal()
         })
     })
 
@@ -28,6 +41,8 @@ function popupListener() {
         close.addEventListener('click', () => {
             document.getElementById('addTaskPopup').classList.remove('active')
             removeDivs()
+            BoardRemoveDiv()
+            gameBoardModal()
         })
     })
 }

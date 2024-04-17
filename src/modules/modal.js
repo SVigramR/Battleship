@@ -6,8 +6,8 @@ function gameBoardModal() {
     for (let index = 0; index < 100; index++) {
         let div = document.createElement('div')
         let compDiv = document.createElement('div')
-        div.setAttribute('id', classArray[index])
-        compDiv.setAttribute('id', classArray[index])
+        div.setAttribute('id', `player${classArray[index]}`)
+        compDiv.setAttribute('id', `comp${classArray[index]}`)
         playerBoard.appendChild(div)
         computerBoard.appendChild(compDiv)
     }
@@ -18,14 +18,27 @@ function placeShipModal() {
     for (let index = 0; index < 100; index++) {
         let div = document.createElement('div')
         let para = document.createElement('p')
-        div.setAttribute('id', classArray[index])
+        div.setAttribute('id', `place${classArray[index]}`)
         para.textContent = classArray[index]
         div.appendChild(para)
         placeBoard.appendChild(div)
     }
 }
 
+function startModal() {
+    const getForm = document.getElementById('addTaskForm')
+    while (getForm.firstChild) {
+        getForm.removeChild(getForm.firstChild)
+    }
+    let startBtn = document.createElement('button')
+    startBtn.setAttribute('id', 'startBtn')
+    startBtn.textContent = "Start"
+    getForm.setAttribute('id', 'startForm')
+    getForm.appendChild(startBtn)
+}
+
 export {
     gameBoardModal,
     placeShipModal,
+    startModal,
 }
