@@ -136,12 +136,6 @@ function gameBoard() {
     }
 }
 
-function playerGame() {
-    const playerGame = gameBoard()
-    playerGame.setBoard(10,10)
-    return playerGame
-}
-
 function computer() {
     const compAI = gameBoard()
     const shipNames = ["Carrier", "Battleship", "Cruiser", "Submarine", "Destroyer"]
@@ -169,7 +163,9 @@ function computer() {
 
 function gameLoop() {}
 
-let player = playerGame()
+let player = gameBoard()
+player.setBoard(10,10)
+let currentShipIndex = 0;
 
 function placingShipLoop() {
     popupListener()
@@ -193,7 +189,7 @@ function playerInput() {
     let statusOutput = document.querySelector('.placing-output')
     const popupBackground = document.querySelectorAll('[data-background]')
 
-    let currentShipIndex = 0;
+    // let currentShipIndex = 0;
     inputBtn.addEventListener('click', () => {
         let getInput = document.getElementById('shipPlacingInput').value
         let row = Number(getInput[0]);
@@ -240,6 +236,11 @@ function toggleAxis() {
     })
 }
 
+function refreshPlayer() {
+    player.setBoard(10,10)
+    currentShipIndex = 0
+}
+
 let game = gameBoard()
 game.setBoard(10, 10)
 game.placeShips("Carrier", [1,1])
@@ -259,5 +260,6 @@ placingShipLoop()
 export {
     ship,
     gameBoard,
-    computer
+    computer,
+    refreshPlayer,
 }

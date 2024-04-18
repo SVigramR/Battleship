@@ -1,3 +1,4 @@
+import { refreshPlayer } from "../main"
 import { gameBoardModal, placeShipModal } from "./modal"
 
 function popupListener() {
@@ -34,6 +35,7 @@ function popupListener() {
             removeDivs()
             BoardRemoveDiv()
             gameBoardModal()
+            refreshPlayer()
         })
     })
 
@@ -43,6 +45,7 @@ function popupListener() {
             removeDivs()
             BoardRemoveDiv()
             gameBoardModal()
+            refreshPlayer()
         })
     })
 }
