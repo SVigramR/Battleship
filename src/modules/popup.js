@@ -13,9 +13,6 @@ function popupListener() {
         while (placeBoard.firstChild) {
             placeBoard.removeChild(placeBoard.firstChild)
         }
-    }
-
-    const BoardRemoveDiv = () => {
         while (playerBoard.firstChild) {
             playerBoard.removeChild(playerBoard.firstChild)
         }
@@ -33,7 +30,6 @@ function popupListener() {
         background.addEventListener('click', () => {
             document.getElementById('addTaskPopup').classList.remove('active')
             removeDivs()
-            BoardRemoveDiv()
             gameBoardModal()
             refreshPlayer()
         })
@@ -43,7 +39,6 @@ function popupListener() {
         close.addEventListener('click', () => {
             document.getElementById('addTaskPopup').classList.remove('active')
             removeDivs()
-            BoardRemoveDiv()
             gameBoardModal()
             refreshPlayer()
         })
