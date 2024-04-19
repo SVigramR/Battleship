@@ -213,6 +213,7 @@ function playerInput() {
             if (currentShipIndex === shipNames.length) {
                 console.log("All ships have been placed.");
                 startModal();
+                startGame()
                 // Start the game loop or do whatever comes next in your game
             } else {
                 shipStatus.textContent = `Placing next ship: ${shipNames[currentShipIndex]}`
@@ -241,6 +242,13 @@ function refreshPlayer() {
     currentShipIndex = 0
 }
 
+function startGame() {
+    let startBtn = document.getElementById('startBtn')
+    startBtn.addEventListener('click', () => {
+        document.getElementById('addTaskPopup').classList.remove('active')
+    })
+}
+
 let game = gameBoard()
 game.setBoard(10, 10)
 game.placeShips("Carrier", [1,1])
@@ -255,7 +263,6 @@ gameBoardModal()
 console.log(Number('0'))
 console.table(player.board) 
 placingShipLoop()
-
 
 export {
     ship,

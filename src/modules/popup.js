@@ -2,7 +2,7 @@ import { refreshPlayer } from "../main"
 import { gameBoardModal, placeShipModal } from "./modal"
 
 function popupListener() {
-    const openTaskForm = document.querySelector('#startBtn')
+    const openTaskForm = document.querySelector('#placeBtn')
     const popupBackground = document.querySelectorAll('[data-background]')
     const popupClose = document.querySelectorAll('[data-close]')
     const placeBoard = document.querySelector('#placeBoard')
