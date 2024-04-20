@@ -161,7 +161,6 @@ function computer() {
     return compAI
 }
 
-function gameLoop() {}
 
 let player = gameBoard()
 player.setBoard(10,10)
@@ -249,19 +248,16 @@ function startGame() {
     })
 }
 
-let game = gameBoard()
-game.setBoard(10, 10)
-game.placeShips("Carrier", [1,1])
-game.placeShips("Battleship", [1,0])
-console.log(game.board)
-game.receiveAttack(1,1)
+function gameLoop() {
+    for (let index = 0; index < 200; index++) {
+        
+    }
+}
 
 let comp = computer()
 console.table(comp.board)
 
 gameBoardModal()
-console.log(Number('0'))
-console.table(player.board) 
 placingShipLoop()
 
 export {
