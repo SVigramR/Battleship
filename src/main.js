@@ -1,4 +1,4 @@
-import { gameBoardModal, startModal } from './modules/modal';
+import { gameBoardModal, restartModal, startModal } from './modules/modal';
 import popupListener from './modules/popup';
 import './style.css'
 
@@ -213,6 +213,8 @@ function playerInput() {
                 console.log("All ships have been placed.");
                 startModal();
                 startGame()
+                restartModal()
+                boxClick()
                 // Start the game loop or do whatever comes next in your game
             } else {
                 shipStatus.textContent = `Placing next ship: ${shipNames[currentShipIndex]}`
@@ -249,13 +251,32 @@ function startGame() {
 }
 
 function gameLoop() {
+    let playerTurn = true;
     for (let index = 0; index < 200; index++) {
         
     }
 }
 
+
+
+const gameBox = document.querySelectorAll('.gamebox')
+function boxClick() {
+    gameBox.forEach(function (box) {
+        box.addEventListener("click", justClick);
+    });
+}
+
 let comp = computer()
 console.table(comp.board)
+
+function attackComp(row,column) {
+    let getHit = comp.receiveAttack(row,column)
+    if (getHit === true) {
+        return "It's a Hit! Hurray."
+    } else {
+        return "You missed to hit anything!"
+    }
+}
 
 gameBoardModal()
 placingShipLoop()

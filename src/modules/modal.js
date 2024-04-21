@@ -6,6 +6,7 @@ function gameBoardModal() {
     for (let index = 0; index < 100; index++) {
         let div = document.createElement('div')
         let compDiv = document.createElement('div')
+        // div.classList.add('gamebox')
         div.setAttribute('id', `player${classArray[index]}`)
         compDiv.setAttribute('id', `comp${classArray[index]}`)
         playerBoard.appendChild(div)
@@ -37,8 +38,20 @@ function startModal() {
     getForm.appendChild(startBtn)
 }
 
+function restartModal() {
+    const controller = document.getElementById('controller')
+    while (controller.firstChild) {
+        controller.removeChild(controller.firstChild)
+    }
+    let restartBtn = document.createElement('button')
+    restartBtn.setAttribute('id', 'restartPage')
+    restartBtn.classList.add('btn')
+    controller.append(restartBtn)
+}
+
 export {
     gameBoardModal,
     placeShipModal,
     startModal,
+    restartModal,
 }
