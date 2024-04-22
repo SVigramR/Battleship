@@ -119,7 +119,12 @@ function gameBoard() {
                 let findBoat = boatObject(attack)
                 findBoat.hit()
                 gameArray[row][column] = null
-                console.log(findBoat.isSunk())
+                if (findBoat.isSunk()) {
+                    console.log(`${findBoat.name} is Sunk`)
+                }
+                return true
+            } else {
+                return false
             }
         },
         allShipSunk: () => {
@@ -212,9 +217,10 @@ function playerInput() {
             if (currentShipIndex === shipNames.length) {
                 console.log("All ships have been placed.");
                 startModal();
-                startGame()
-                restartModal()
-                boxClick()
+                startGame();
+                // addGameBoxClass();
+                restartModal();
+                boxClick();
                 // Start the game loop or do whatever comes next in your game
             } else {
                 shipStatus.textContent = `Placing next ship: ${shipNames[currentShipIndex]}`
@@ -259,10 +265,15 @@ function gameLoop() {
 
 
 
-const gameBox = document.querySelectorAll('.gamebox')
 function boxClick() {
-    gameBox.forEach(function (box) {
-        box.addEventListener("click", justClick);
+    let gameBox = document.querySelectorAll('.gamebox')
+    gameBox.forEach(box => {
+        box.addEventListener("click", (event) => {
+            let compId = event.target.id
+            console.log(compId)
+            console.log(attackComp(Number(compId[4]), Number(compId[5])))
+            document.getElementById(compId).classList.remove('gamebox')
+        }, {once: true});
     });
 }
 

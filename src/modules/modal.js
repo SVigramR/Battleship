@@ -6,7 +6,7 @@ function gameBoardModal() {
     for (let index = 0; index < 100; index++) {
         let div = document.createElement('div')
         let compDiv = document.createElement('div')
-        // div.classList.add('gamebox')
+        compDiv.classList.add('gamebox')
         div.setAttribute('id', `player${classArray[index]}`)
         compDiv.setAttribute('id', `comp${classArray[index]}`)
         playerBoard.appendChild(div)
