@@ -120,7 +120,7 @@ function gameBoard() {
                 findBoat.hit()
                 gameArray[row][column] = null
                 if (findBoat.isSunk()) {
-                    console.log(`${findBoat.name} is Sunk`)
+                    console.log(`${findBoat.name}is Sunk`)
                 }
                 return true
             } else {
@@ -211,6 +211,7 @@ function playerInput() {
                 id.classList.add('activeship')
                 playerid.classList.add('activeship')
             }
+            statusOutput.textContent = `Successfully ${shipNames[currentShipIndex]} has been Placed`
             // Move to the next ship if the placement is successful
             currentShipIndex++;
             // Check if all ships have been placed
@@ -218,7 +219,6 @@ function playerInput() {
                 console.log("All ships have been placed.");
                 startModal();
                 startGame();
-                // addGameBoxClass();
                 restartModal();
                 boxClick();
                 // Start the game loop or do whatever comes next in your game
@@ -270,8 +270,13 @@ function boxClick() {
     gameBox.forEach(box => {
         box.addEventListener("click", (event) => {
             let compId = event.target.id
-            console.log(compId)
-            console.log(attackComp(Number(compId[4]), Number(compId[5])))
+            let hitCell = attackComp(Number(compId[4]), Number(compId[5]))
+            console.log(hitCell)
+            if (hitCell === "It's a Hit! Hurray.") {
+                document.getElementById(compId).style.backgroundColor = "red"
+            } else {
+                document.getElementById(compId).style.backgroundColor = "gray"
+            }
             document.getElementById(compId).classList.remove('gamebox')
         }, {once: true});
     });
