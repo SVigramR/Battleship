@@ -268,11 +268,10 @@ function gameListener() {
                 document.getElementById(compId).style.backgroundColor = "gray"
             }
             document.getElementById(compId).classList.remove('gamebox')
-
-            attackPlayer()
+            
+            setTimeout(attackPlayer, 1000);
         }, {once: true});
     });
-
 }
 
 let comp = computer()

@@ -45,6 +45,7 @@ function restartModal() {
     }
     let restartBtn = document.createElement('button')
     restartBtn.setAttribute('id', 'restartPage')
+    restartBtn.textContent = "Restart"
     restartBtn.classList.add('btn')
     controller.append(restartBtn)
 }
