@@ -1,4 +1,4 @@
-import { gameBoardModal, restartModal, startModal } from './modules/modal';
+import { classArray, gameBoardModal, restartModal, startModal } from './modules/modal';
 import popupListener from './modules/popup';
 import './style.css'
 
@@ -166,7 +166,6 @@ function computer() {
     return compAI
 }
 
-
 let player = gameBoard()
 player.setBoard(10,10)
 let currentShipIndex = 0;
@@ -220,7 +219,7 @@ function playerInput() {
                 startModal();
                 startGame();
                 restartModal();
-                boxClick();
+                gameListener()
                 // Start the game loop or do whatever comes next in your game
             } else {
                 shipStatus.textContent = `Placing next ship: ${shipNames[currentShipIndex]}`
@@ -256,16 +255,7 @@ function startGame() {
     })
 }
 
-function gameLoop() {
-    let playerTurn = true;
-    for (let index = 0; index < 200; index++) {
-        
-    }
-}
-
-
-
-function boxClick() {
+function gameListener() {
     let gameBox = document.querySelectorAll('.gamebox')
     gameBox.forEach(box => {
         box.addEventListener("click", (event) => {
@@ -278,8 +268,11 @@ function boxClick() {
                 document.getElementById(compId).style.backgroundColor = "gray"
             }
             document.getElementById(compId).classList.remove('gamebox')
+
+            attackPlayer()
         }, {once: true});
     });
+
 }
 
 let comp = computer()
@@ -291,6 +284,39 @@ function attackComp(row,column) {
         return "It's a Hit! Hurray."
     } else {
         return "You missed to hit anything!"
+    }
+}
+
+function attackPlayerCoordinates() {
+    let randomHit = []
+    const attackCoords = () => {
+        let randomCoordsArray = []
+        while (randomCoordsArray.length < 100) {
+            let random = Math.floor(Math.random() * 100)
+            if (!randomCoordsArray.includes(random)) {
+                randomCoordsArray.push(random)
+            }
+        }
+        return randomCoordsArray
+    }
+    let randomSelect = attackCoords()
+    for (let index = 0; index < classArray.length; index++) {
+        randomHit.push(classArray[randomSelect[index]])
+    }
+    return randomHit
+}
+
+let attack = attackPlayerCoordinates()
+
+function attackPlayer() {
+    let popCoord = attack.pop()
+    let selectDiv = document.getElementById(`player${popCoord}`)
+    let getHit = player.receiveAttack(Number(popCoord[0]), Number(popCoord[1]))
+    if (getHit === true) {
+        selectDiv.classList.remove('activeship')
+        selectDiv.style.backgroundColor = "red";
+    } else {
+        selectDiv.style.backgroundColor = "gray";
     }
 }
 

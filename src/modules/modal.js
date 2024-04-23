@@ -54,4 +54,5 @@ export {
     placeShipModal,
     startModal,
     restartModal,
+    classArray,
 }
