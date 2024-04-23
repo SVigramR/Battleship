@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battleship</title>
+<script defer src="bundle.js"></script></head>
+<body>
+    <header>
+        <div class="radar"></div>
+        <div class="title">
+            Battleship
+        </div>
+    </header>
+
+    <main>
+        <div class="popup" id="addTaskPopup">
+            <div data-background class="overlay" id="addTaskOverlay"></div>
+            <div class="form flex-column" id="addTaskForm">
+                <div class="addTaskHeader">
+                    <h1 class="addFormTitle">Place Ships...</h1>
+                    <div data-close class="addTaskClose">x</div>
+                </div>
+                <div class="placeShipController">
+                    <div class="placeInputHolder">
+                        <input type="text" name="shipPlacing" id="shipPlacingInput" placeholder="00, 01, 02,.....99">
+                        <button id="shipPlacingBtn">Place</button>
+                    </div>
+                    <div class="toggle-container">
+                        <input type="checkbox" class="toggle-checkbox" id="toggle">
+                        <label class="toggle-label" for="toggle"></label>
+                      </div>                      
+                    <div id="placingStatus" class="placeing-status">Place Ship: Carrier</div>
+                </div>
+                <div class="placeBoardHolder">
+                    <div id="placeBoard"></div>
+                </div>
+                <div class="placing-output">Begin to Place Ships</div>
+            </div>
+        </div>
+        <div id="boardHolder">
+            <div id="playerBoard"></div>
+            <div id="computerBoard"></div>
+        </div>
+        <div id="controller">
+            <button id="placeBtn" class="btn">Place Ships</button>
+        </div>
+    </main>
+
+    <footer>
+        <h4 class="foo">
+            Copyright @
+            <script>
+                document.write(new Date().getFullYear());
+            </script>
+            <a href="https://github.com/SVigramR/Battleship" target="_blank">SVigramR</a>
+        </h4>  
+    </footer>
+    
+</body>
+</html>
